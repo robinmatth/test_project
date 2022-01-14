@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('risk_register.urls')),
     path('home/', include('risk_register.urls')),
     path('people/', include('risk_register.urls')),
+    path('export-csv/', include('risk_register.urls')),
     path('admin/', admin.site.urls),
     
 ]
