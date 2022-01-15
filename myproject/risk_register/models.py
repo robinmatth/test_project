@@ -10,6 +10,3 @@ class Risks(models.Model):
     risk_status = models.CharField(max_length=200)
     risk_assignee = models.CharField(max_length=200)
     risk_rank = models.IntegerField(default=0)
-
-class Person(models.Model):
-    name = models.CharField(max_length=100, verbose_name="full name")
