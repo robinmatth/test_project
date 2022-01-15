@@ -33,23 +33,17 @@ def home(request):
 def export_csv(request):
 
     response=HttpResponse(content_type='text/csv')
-    response['Content-Disposition']='attachement; filename=Risk-Register'+ str(datetime.datetime.now())+'.csv'
-
+   
     writer=csv.writer(response)
     # the csv writer
     writer = csv.writer(response)
     headers = ['Risk Description','Risk Mitigation','Risk Owner','Risk Assignee','Risk Due Date','Risk Status']
     writer.writerow(headers)
- 
-    queryset = Risks.objects.values()
-    # Write a first row with header information
-    writer.writerow(queryset)
-    # Write data rows
-    print(queryset)
     
-    # for obj in queryset:
-        
-    #     writer.writerow([getattr(obj, field) for field in field_names])
+    for risk in Risks.objects.all().values_list('risk_description','risk_mitigation','risk_owner','risk_assignee','risk_due_date','risk_status'):
+        writer.writerow(risk)
+    
+    response['Content-Disposition']='attachement; filename=Risk-Register'+ str(datetime.datetime.now())+'.csv'
     return response
 
 
