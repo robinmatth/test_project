@@ -1,10 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>Welcome to the base HTML</h1>
+
+<body>
+
+
+
 <!--Adding a button URL planned for testing export to csv-->
-<div style="overflow-x:auto;">
-<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+<p>Welcome</p>
 <br>
-</div>
+<br>
+
+<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+
+<div class="container">
+
 <div class="table-responsive">
 <table class="table table-striped">
     <thead class="thead-dark">
@@ -37,10 +47,9 @@
       {% endfor %} 
     </tbody>
   </table>
-
 </div>
 
+  </body>
+</html>
 
 {% endblock content %}
-
-</body>

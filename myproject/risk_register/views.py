@@ -1,6 +1,6 @@
 from dataclasses import field
 import http
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponse,HttpResponseRedirect
 import django_tables2 as tables
 from .models import Risks
@@ -9,13 +9,10 @@ from django.template import loader
 import csv
 import datetime
 
+
 def index(request):
-    items_list = Risks.objects.all()
-    template = loader.get_template('base.html')
-    context = {
-        'items_list': items_list,
-    }
-    return HttpResponse(template.render(context, request))
+    # return response
+    return render(request, 'base.html')
 
 def risk_register(request):
     items_list = Risks.objects.all()
