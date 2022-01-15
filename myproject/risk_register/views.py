@@ -39,3 +39,9 @@ def delete_risk(request, id):
     risk.delete()
     return redirect('')
  
+def risk_details(request,id):
+    risk = Risks.objects.get(pk=id)
+    context = {
+        'risk': risk
+    }
+    return render (request,"risk_details.html",context)
