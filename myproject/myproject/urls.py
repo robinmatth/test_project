@@ -18,9 +18,9 @@ from django.urls import include, path
 from risk_register import urls, views
 
 urlpatterns = [
-    path('', include('risk_register.urls')),
-    path('people/', include('risk_register.urls')),
-    path('export-csv/', include('risk_register.urls')),
+    path('', views.index, name="index"),
+    path('risk_register/', views.risk_register, name="risk_register"),
+    path('export_csv', views.export_csv, name='export-csv'),
     path('admin/', admin.site.urls),
     
 ]
