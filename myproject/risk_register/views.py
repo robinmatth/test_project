@@ -5,7 +5,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 import django_tables2 as tables
 from .models import Risks
 from django.template import loader
-
+from .forms import AddRisksForm
 import csv
 import datetime
 
@@ -45,3 +45,17 @@ def risk_details(request,id):
         'items_list': items_list
     }
     return render (request,"risk_details.html",context)
+
+def add_risks(request):
+    submitted = False
+    if request.method == "POST":
+       form = AddRisksForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return HttpResponseRedirect('/add_risks?submitted=True')
+    else:
+        form = AddRisksForm
+        if 'submitted' in request.GET:
+            submitted = True
+            
+    return render(request,'add_risks.html', {'form': form, 'submited': submitted})
