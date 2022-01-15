@@ -35,13 +35,13 @@ def export_csv(request):
     return response
 
 def delete_risk(request, id):
-    risk = Risks.objects.get(pk=id)
-    risk.delete()
-    return redirect('')
+    items_list = Risks.objects.get(pk=id)
+    items_list.delete()
+    return redirect('risk_register')
  
 def risk_details(request,id):
-    risk = Risks.objects.get(pk=id)
+    items_list = Risks.objects.get(pk=id)
     context = {
-        'risk': risk
+        'items_list': items_list
     }
     return render (request,"risk_details.html",context)

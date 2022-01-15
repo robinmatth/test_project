@@ -11,10 +11,10 @@
 <br>
 <br>
 
-<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+
 
 <div class="container">
-
+<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead class="thead-dark">
@@ -40,7 +40,7 @@
         <td>{{ items.risk_assignee }}</td>
         <td>{{ items.risk_due_date }}</td>
         <td>{{ items.risk_status }}</td>
-        <td><a href="{% url 'risk_details' items.id %}"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
+        <td><a href="{% url 'delete_risk' items.id %}"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
         <td><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
 
