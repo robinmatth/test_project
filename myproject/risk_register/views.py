@@ -38,6 +38,16 @@ def delete_risk(request, id):
     items_list = Risks.objects.get(pk=id)
     items_list.delete()
     return redirect('risk_register')
+
+def search_risks(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        risks = Risks.objects.filter(risk_description__contains=searched)
+        return render (request,"search_risks.html",
+        {'searched':searched, 'risks':risks})
+    else:
+
+        return render (request,"search_risks.html",{})
  
 def risk_details(request,id):
     items_list = Risks.objects.get(pk=id)
