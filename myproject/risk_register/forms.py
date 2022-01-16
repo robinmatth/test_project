@@ -11,7 +11,7 @@ class AddRisksForm(ModelForm):
         fields = ('id','risk_description','risk_impact','risk_mitigation','risk_owner','risk_assignee','risk_status')
         labels = {
             'risk_description':'',
-            'risk_impact':'',
+            'risk_impact':' Select a Risk Category',
             'risk_mitigation':'',
             'risk_owner':'',
             'risk_assignee':'',
@@ -24,7 +24,7 @@ class AddRisksForm(ModelForm):
             ('scope','SCOPE'),
             ('other','OTHER'),
         ]
-        choices = forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
+        
         widgets = {
             'risk_description':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Description'}),
             
@@ -33,3 +33,4 @@ class AddRisksForm(ModelForm):
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),
             'risk_status':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Status'}),
         }
+        choices =forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),

@@ -4,14 +4,10 @@
 
 <body>
 
-
-
 <!--Adding a button URL planned for testing export to csv-->
-<p>Welcome</p>
+
 <br>
 <br>
-
-
 
 <div class="container">
 <a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
@@ -42,8 +38,8 @@
         <td>{{ items.risk_assignee }}</td>
         <td>{{ items.risk_due_date }}</td>
         <td>{{ items.risk_status }}</td>
-        <td><a href="{% url 'delete_risk' items.id %}">Delete risk<i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
-        <td><a href="{% url 'risk_details' items.id %}">View details<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+        <td><a href="{% url 'delete_risk' items.id %}">Delete<i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
+        <td><a href="{% url 'risk_details' items.id %}">View/edit<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
 
       {% endfor %} 
