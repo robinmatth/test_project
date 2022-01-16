@@ -8,16 +8,26 @@ from .models import Risks
 class AddRisksForm(ModelForm):
     class Meta:
         model = Risks
-        fields = ('id','risk_description','risk_mitigation','risk_owner','risk_assignee','risk_status')
+        fields = ('id','risk_description','risk_impact','risk_mitigation','risk_owner','risk_assignee','risk_status')
         labels = {
             'risk_description':'',
+            'risk_impact':'',
             'risk_mitigation':'',
             'risk_owner':'',
             'risk_assignee':'',
             'risk_status':'',
         }
+        IMPACT_CHOICES = [
+            ('resources','RESOURCES'),
+            ('cost', 'COST'),
+            ('schedule','SCHEDULE'),
+            ('scope','SCOPE'),
+            ('other','OTHER'),
+        ]
+        choices = forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
         widgets = {
             'risk_description':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Description'}),
+            
             'risk_mitigation':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Mitigation'}),
             'risk_owner':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Owner'}),
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),

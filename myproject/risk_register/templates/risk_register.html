@@ -21,6 +21,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Risk Description</th>
+        <th scope="col">Risk Impact</th>
         <th scope="col">Risk Mitigation</th>
         <th scope="col">Risk Owner</th>
         <th scope="col">Risk Assignee</th>
@@ -35,6 +36,7 @@
         {% for items in items_list.all %}  
         <th scope="row">{{ items.id }}</th>
         <td>{{ items.risk_description }}</td>
+        <td>{{ items.risk_impact }}</td>
         <td>{{ items.risk_mitigation }}</td>
         <td>{{ items.risk_owner }}</td>
         <td>{{ items.risk_assignee }}</td>
