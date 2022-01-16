@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+  <br>
+  <br>
+  <p></p>
+<div class="container">
+
+  <div class="table-responsive">
+  <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Risk Description</th>
+          <th scope="col">Risk Impact</th>
+          <th scope="col">Risk Mitigation</th>
+          <th scope="col">Risk Owner</th>
+          <th scope="col">Risk Assignee</th>
+          <th scope="col">Risk Due Date</th>
+          <th scope="col">Risk Status</th>
+
+        </tr>
+      </thead>
+      <tbody>
+         <tr>  
+
+          <th scope="row">{{ items_list.id }}</th>
+          <td>{{ items_list.risk_description }}</td>
+          <td>{{ items_list.risk_impact }}</td>
+          <td>{{ items_list.risk_mitigation }}</td>
+          <td>{{ items_list.risk_owner }}</td>
+          <td>{{ items_list.risk_assignee }}</td>
+          <td>{{ items_list.risk_due_date }}</td>
+          <td>{{ items_list.risk_status }}</td>
+
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  </body>
+</html>
+
+{% endblock content %}

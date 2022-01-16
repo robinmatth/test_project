@@ -4,23 +4,20 @@
 
 <body>
 
-
-
 <!--Adding a button URL planned for testing export to csv-->
-<p>Welcome</p>
-<br>
-<br>
 
-<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+<br>
+<br>
 
 <div class="container">
-
+<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Risk Description</th>
+        <th scope="col">Risk Impact</th>
         <th scope="col">Risk Mitigation</th>
         <th scope="col">Risk Owner</th>
         <th scope="col">Risk Assignee</th>
@@ -35,13 +32,14 @@
         {% for items in items_list.all %}  
         <th scope="row">{{ items.id }}</th>
         <td>{{ items.risk_description }}</td>
+        <td>{{ items.risk_impact }}</td>
         <td>{{ items.risk_mitigation }}</td>
         <td>{{ items.risk_owner }}</td>
         <td>{{ items.risk_assignee }}</td>
         <td>{{ items.risk_due_date }}</td>
         <td>{{ items.risk_status }}</td>
-        <td><a href=""><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
-        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+        <td><a href="{% url 'delete_risk' items.id %}">Delete<i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
+        <td><a href="{% url 'risk_details' items.id %}">View/edit<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
 
       {% endfor %} 
