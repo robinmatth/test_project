@@ -8,7 +8,9 @@ from django.template import loader
 from .forms import AddRisksForm
 import csv
 import datetime
-
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 
 def index(request):
     # return response
@@ -69,3 +71,27 @@ def add_risks(request):
             submitted = True
             
     return render(request,'add_risks.html', {'form': form, 'submited': submitted})
+
+def export_pdf(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    headers = ['id','Risk Description','Risk Mitigation','Risk Owner','Risk Assignee','Risk Due Date','Risk Status']
+        
+    #p = Risks.objects.all().values_list('id','risk_description','risk_mitigation','risk_owner','risk_assignee','risk_due_date','risk_status'),
+
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')

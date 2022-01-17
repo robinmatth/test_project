@@ -10,6 +10,7 @@ urlpatterns = [
     path('risk_register/<int:id>/',views.risk_details,name='risk_details'),
     path('/<int:id>/',views.delete_risk,name='delete_risk'),
     path('export_csv', views.export_csv, name='export-csv'),
+    path('export_pdf', views.export_pdf, name='export_pdf'),
 
 
 ]
