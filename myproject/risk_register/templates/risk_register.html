@@ -7,11 +7,14 @@
 <!--Adding a button URL planned for testing export to csv-->
 
 <br>
-<br>
+
 
 <div class="container">
 <a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
-<div class="table-responsive">
+<a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a>
+<br>
+<br>
+<div class="table-responsive table-hover">
 <table class="table table-striped">
     <thead class="thead-dark">
       <tr>

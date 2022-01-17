@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+  <br>
+  <br>
+  <p></p>
+<div class="container">
+  <p>Risk Search</p>
+</div>
+
+{% if searched %}
+  <h2>You searched for {{ searched }}</h2>
+  {% for risk in risks %}
+    {{ risk.risk_description }}
+  {% endfor %}
+  {% else %}
+  <h1>You really should check out our search bar!</h1>
+{% endif %}
+
+  </body>
+</html>
+
+{% endblock content %}
