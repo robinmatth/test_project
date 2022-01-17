@@ -3,7 +3,19 @@
 {% block content %}
 
 <body>
-  <div class="jumbotron jumbotron-fluid">
+  {% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  
+{% endfor %}
+{% endif %}<div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4">Add risks</h1>
       <p class="lead">This form is to add risks to the risk register for continous monitoring...</p>
@@ -11,6 +23,7 @@
   </div>
   <div class="container">
     <div class="form-group">
+
 
 {% if submitted %}
   Your risk was added succesfully!

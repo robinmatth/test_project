@@ -11,6 +11,7 @@ from django.views.generic import View
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+from django.contrib import messages
 
 
 def index(request):
@@ -55,6 +56,7 @@ def add_risks(request):
        form = AddRisksForm(request.POST)
        if form.is_valid():
            form.save()
+           messages.success(request, ('You have succesfully added a risk to the register!'))
            return HttpResponseRedirect('/add_risks?submitted=True')
     else:
         form = AddRisksForm
