@@ -3,30 +3,28 @@
 {% block content %}
 
 <body>
-
+<br>
+<br>
 <!--Adding a button URL planned for testing export to csv-->
 <div class="container">
   {%  for items in items_list.all  %}
       {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {%  endif %}
-        <div class="col-md-4" onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
-            <div class="card">
+        <div class="col-sm-4 py-2" onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
+            <div class="card h-100">
                 <img src="" alt="">
                 <div class="card-content">
-                    <br>
-                    <h4>Risk {{ forloop.counter }}</h4>
-                    <hr>
-                    
-
-                    {{ items.risk_description }}
-                    {{ items.risk_mitigation }}
-                    
-                    
-                    <br>
+                  <div class="card-header h-50">
+                    <h5 class="card-title">{{ items.risk_description }}</h5>                
+                    </div>
+                    <p>{{ items.risk_mitigation }}</p>
+                    <p>{{ items.risk_due_date }}</p>
+                    <!-- <li class="list-group-item">{{ items.risk_mitigation }}</li>
+                    <li class="list-group-item">{{ items.risk_due_date }}</li> -->
 
                 </div><!-- card content -->
             </div><!-- card -->
         </div><!-- col-md-4 -->
-  {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing --><hr>{%  endif %}
+  {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing --><br>{%  endif %}
   {%  endfor %}
 </div><!-- container -->
 
