@@ -20,7 +20,7 @@ class AddRisksForm(ModelForm):
             'risk_owner':'',
             'risk_assignee':'',
             'risk_status':'',
-            'risk_due_date':'',
+            'risk_due_date':'Choose a Risk due date',
         }
         IMPACT_CHOICES = [
             ('resources','Resources'),

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+
+<!--Adding a button URL planned for testing export to csv-->
+<div class="container">
+  {%  for items in items_list.all  %}
+      {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {%  endif %}
+        <div class="col-md-4" onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
+            <div class="card">
+                <img src="" alt="">
+                <div class="card-content">
+                    <br>
+                    <h4>Risk {{ forloop.counter }}</h4>
+                    <hr>
+                    
+
+                    {{ items.risk_description }}
+                    {{ items.risk_mitigation }}
+                    
+                    
+                    <br>
+
+                </div><!-- card content -->
+            </div><!-- card -->
+        </div><!-- col-md-4 -->
+  {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing --><hr>{%  endif %}
+  {%  endfor %}
+</div><!-- container -->
+
+
+
+
+
+
+
+ 
+<!-- <div class="container">
+  <div class="row">
+    
+{% for items in items_list.all %}
+
+{{ items.risk_description }}
+{{ items.risk_mitigation }}
+
+{% endfor %} -->
+
+</body>
+</html>
+
+{% endblock content %}

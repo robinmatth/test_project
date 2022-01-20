@@ -20,6 +20,7 @@ from risk_register import urls, views
 urlpatterns = [
     path('', views.index, name="index"),
     path('risk_register/', views.risk_register, name="risk_register"),
+    path('risk_gallery/', views.risk_gallery, name="risk_gallery"),
     path('add_risks/', views.add_risks, name="add_risks"),
     path('search_risks/', views.search_risks, name="search_risks"),
     path('risk_register/<int:id>/', views.risk_details, name="risk_details"),
