@@ -17,7 +17,7 @@ from django.contrib.staticfiles import finders
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from risk_register.serializers import UserSerializer, GroupSerializer
+from risk_register.serializers import UserSerializer, GroupSerializer, RisksSerializer
 
 
 def index(request):
@@ -81,7 +81,23 @@ def add_risks(request):
 #Creating an export to PDF option (uses ReportLab library)
 
 def export_pdf(request):
-    pass
+    items_list = Risks.objects.all()
+    template_path = 'risk_register.html'
+    context = {'items_list': items_list,}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 #This function exports CSV the risk register model into a CSV file
 def export_csv(request):
@@ -144,4 +160,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class RisksViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Risks.objects.all()
+    serializer_class = RisksSerializer
     permission_classes = [permissions.IsAuthenticated]
