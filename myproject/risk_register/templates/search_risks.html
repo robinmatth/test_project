@@ -13,7 +13,40 @@
 {% if searched %}
   <h2>You searched for {{ searched }}</h2>
   {% for risk in risks %}
-    {{ risk.risk_description }}
+  <div class="container">
+
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Risk Description</th>
+            <th scope="col">Risk Impact</th>
+            <th scope="col">Risk Mitigation</th>
+            <th scope="col">Risk Owner</th>
+            <th scope="col">Risk Assignee</th>
+            <th scope="col">Risk Due Date</th>
+            <th scope="col">Risk Status</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+           <tr>  
+  
+            <th scope="row">{{ risk.id }}</th>
+            <td>{{ risk.risk_description }}</td>
+            <td>{{ risk.risk_impact }}</td>
+            <td>{{ risk.risk_mitigation }}</td>
+            <td>{{ risk.risk_owner }}</td>
+            <td>{{ risk.risk_assignee }}</td>
+            <td>{{ risk.risk_due_date }}</td>
+            <td>{{ risk.risk_status }}</td>
+  
+            </tr>
+  
+        </tbody>
+      </table>
+  
   {% endfor %}
   {% else %}
   <h1>You really should check out our search bar!</h1>
