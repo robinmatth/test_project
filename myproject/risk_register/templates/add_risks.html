@@ -13,12 +13,12 @@
   <br>
 
 
-<div class="container-fluid">
-    <div class="form-group">
+
+    
 {% if messages %}
 {% for message in messages %}
 <div class="container-fluid p-0">
-  <div class="alert {{ message }} alert-dismissible" role="alert" >
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="True">&times;</span>
     </button>
@@ -27,11 +27,12 @@
 </div>
 {% endfor %}
 {% endif %}
-</div>
+
 {% if submitted %}
   Your risk was added succesfully!
 
 {% else %}
+<div class="form-group">
   <form action="" method=POST>
   {% csrf_token %}
   {{ form.as_p }}

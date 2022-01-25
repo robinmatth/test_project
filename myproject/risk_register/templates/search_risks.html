@@ -3,32 +3,27 @@
 {% block content %}
 
 <body>
-  <br>
-  <br>
-  <p></p>
-<div class="container">
 
-
-
+<div class="container-fluid">
 {% if searched %}
   <h2>You searched for <strong>{{ searched }}</strong></h2>
-  {% for risk in risks %}</div>
-  <div class="container">
+  {% for risk in risks %}
+</div>
+<br>
+<div class="table-responsive table-hover table-bordered ">
+<table class="table table-striped">
+    <thead class="bg-info text-white text-nowrap">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Risk Description</th>
+        <th scope="col ">Risk Impact</th>
+        <th scope="col">Risk Mitigation</th>
+        <th scope="col">Risk Owner</th>
+        <th scope="col">Risk Assignee</th>
+        <th scope="col">Risk Due Date</th>
+        <th scope="col">Risk Status</th>
 
-    <div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Risk Description</th>
-            <th scope="col">Risk Impact</th>
-            <th scope="col">Risk Mitigation</th>
-            <th scope="col">Risk Owner</th>
-            <th scope="col">Risk Assignee</th>
-            <th scope="col">Risk Due Date</th>
-            <th scope="col">Risk Status</th>
-  
-          </tr>
+      </tr>
         </thead>
         <tbody>
            <tr>  
@@ -44,11 +39,11 @@
   
             </tr>
   
-        </tbody>
-      </table>
-  
+        
   {% endfor %}
-  {% else %}
+  </tbody>
+      </table>
+ </div> {% else %}
   <h1>You really should check out our search bar!</h1>
 {% endif %}
 

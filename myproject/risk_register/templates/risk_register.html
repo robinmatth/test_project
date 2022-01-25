@@ -15,13 +15,14 @@
 
 </div><a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
 <a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a><br>
+<br>
 <div class="table-responsive table-hover table-bordered ">
 <table class="table table-striped">
-    <thead class="bg-info text-white">
+    <thead class="bg-info text-white text-nowrap">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Risk Description</th>
-        <th scope="col">Risk Impact</th>
+        <th scope="col ">Risk Impact</th>
         <th scope="col">Risk Mitigation</th>
         <th scope="col">Risk Owner</th>
         <th scope="col">Risk Assignee</th>
@@ -34,18 +35,18 @@
     <tbody>
        <tr>  
         {% for items in items_list.all %}  
-        <th scope="row">{{ items.id }}</th>
+        <th scope="row ">{{ items.id }}</th>
         <td>{{ items.risk_description }}</td>
         <td>{{ items.risk_impact }}</td>
         <td>{{ items.risk_mitigation }}</td>
-        <td>{{ items.risk_owner }}</td>
+        <td class="text-nowrap">{{ items.risk_owner }}</td>
         <td>{{ items.risk_assignee }}</td>
         <td>{{ items.risk_due_date }}</td>
         <td>{{ items.risk_status }}</td>
         <td class="text-center">
           <a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato;"><i class="fa fa-minus-circle"></i></a>
         </span></td>
-        <td><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+        <td class="text-center"><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
 
       {% endfor %} 
