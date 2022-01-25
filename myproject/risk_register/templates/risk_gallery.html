@@ -6,23 +6,20 @@
 <br>
 <br>
 <!--Adding a button URL planned for testing export to csv-->
-<div class="container">
+<div class="container ">
   {%  for items in items_list.all  %}
-      {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {%  endif %}
-        <div class="col-sm-4 py-2" onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
-            <div class="card h-100">       
+      {% if forloop.counter0|divisibleby:3 %} <div class="row text-center "> {%  endif %}
+        <div class="col-sm-4 py-2 " onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
+            <div class="card h-100 bg-light">       
                 <div class="card-content text-left">
-                  <div class="card-header bg-secondary text-white">
+                  <div class="card-header bg-info text-white">
                     <h5 class="card-title">Project Risk {{ items.id }}</h5>            
                     </div>
                     <div class="card-body bg-light">
-                      <p class="card-text text-left"><strong>Description:</strong> {{ items.risk_description }}</p>
+                      <p class="card-text text-left "><strong>Description:</strong> {{ items.risk_description }}</p>
                     <p class="card-text text-left"><strong>Mitigation:</strong> {{ items.risk_mitigation }}</p>
                     <p class="card-text text-left"><strong>Due Date:</strong>  {{ items.risk_due_date }}</p>
                     </div>
-                    <!-- <li class="list-group-item">{{ items.risk_mitigation }}</li>
-                    <li class="list-group-item">{{ items.risk_due_date }}</li> -->
-
                 </div><!-- card content -->
             </div><!-- card -->
         </div><!-- col-md-4 -->

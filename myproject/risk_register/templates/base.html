@@ -16,43 +16,31 @@
         <script src="extensions/mobile/bootstrap-table-mobile.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
     </head>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
 
-<a class="navbar-brand" href="/">PM Tools</a>
-
-<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    <li class="nav-item active">
-      <a class="nav-link" href="{% url 'risk_register' %}">Risk Register<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_risks' %}">Add Risk</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'risk_gallery' %}">Risk Gallery</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul>
-  <form class="form-inline my-2 my-lg-0" method=POST action="{% url 'search_risks' %}">
-    {% csrf_token %}
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</div>
-</nav>
-<body>
-
-
+{% block navbar %}{% include 'navbar.html' %}{% endblock navbar%}
 {% block content %}
 
-{% endblock content %}
+<body>
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>
 
+
+
+
+{% endblock content %}
 </body>
+
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

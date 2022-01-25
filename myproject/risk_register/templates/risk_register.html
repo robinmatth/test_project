@@ -9,14 +9,15 @@
 <br>
 
 
-<div class="container">
-<a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
-<a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a>
+<div class="container-fluid">
 <br>
 <br>
-<div class="table-responsive table-hover">
+
+</div><a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+<a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a><br>
+<div class="table-responsive table-hover table-bordered ">
 <table class="table table-striped">
-    <thead class="thead-dark">
+    <thead class="bg-info text-white">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Risk Description</th>
@@ -41,7 +42,9 @@
         <td>{{ items.risk_assignee }}</td>
         <td>{{ items.risk_due_date }}</td>
         <td>{{ items.risk_status }}</td>
-        <td><a href="{% url 'delete_risk' items.id %}"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 1.2em; color: Tomato;"></i></a></td>
+        <td class="text-center">
+          <a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato;"><i class="fa fa-minus-circle"></i></a>
+        </span></td>
         <td><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
 
