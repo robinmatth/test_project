@@ -5,12 +5,19 @@ import django_tables2 as tables
 from .models import Risks
 from django.template import loader
 from .forms import AddRisksForm
-import csv, io, datetime,http
+import csv, io, datetime,http,os
 from django.http import FileResponse
 from django.views.generic import View
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+import xhtml2pdf
+from django.contrib import messages
+from django.conf import settings
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from risk_register.serializers import UserSerializer, GroupSerializer, RisksSerializer
 
 
 def index(request):
@@ -25,6 +32,13 @@ def risk_register(request):
     }
     return HttpResponse(template.render(context, request))
 
+def risk_gallery(request):
+    items_list = Risks.objects.all()
+    template = loader.get_template('risk_gallery.html')
+    context = {
+        'items_list': items_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def delete_risk(request, id):
@@ -55,6 +69,7 @@ def add_risks(request):
        form = AddRisksForm(request.POST)
        if form.is_valid():
            form.save()
+           messages.success(request, ('You have succesfully added a risk to the register!'))
            return HttpResponseRedirect('/add_risks?submitted=True')
     else:
         form = AddRisksForm
@@ -66,34 +81,23 @@ def add_risks(request):
 #Creating an export to PDF option (uses ReportLab library)
 
 def export_pdf(request):
-    buf = io.BytesIO()
-    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
-    risks = Risks.objects.all()
-    
-    lines = [
-        'Print this text to prove this is working'
-    ]
-    # for risk in risks:
-    #     lines.append(risks.risk_description)
-    #     lines.append(risks.risk_mitigation)
-    #     lines.append(risks.risk_owner)
-    #     lines.append(risks.risk_assignee)
-    #     lines.append(risks.risk_due_date)
-    #     lines.append(risks.risk_status)
-    # else:
-    #     print('loop is not working')
+    items_list = Risks.objects.all()
+    template_path = 'risk_register.html'
+    context = {'items_list': items_list,}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
 
-    for line in lines:
-        textob.textLine(line)
-
-    c.drawText(textob)
-    c.showPage()
-    c.save()
-    buf.seek(0)
-    return FileResponse(buf, as_attachment=True, filename='Risks.pdf')
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 #This function exports CSV the risk register model into a CSV file
 def export_csv(request):
@@ -106,3 +110,62 @@ def export_csv(request):
         writer.writerow(risk)
     response['Content-Disposition']='attachement; filename=Risk-Register'+ str(datetime.datetime.now())+'.csv'
     return response
+
+#required for PDF Generation
+def link_callback(uri, rel):
+        """
+        Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+        resources
+        """
+        result = finders.find(uri)
+        if result:
+                if not isinstance(result, (list, tuple)):
+                        result = [result]
+                result = list(os.path.realpath(path) for path in result)
+                path=result[0]
+        else:
+                sUrl = settings.STATIC_URL        # Typically /static/
+                sRoot = settings.STATIC_ROOT      # Typically /home/userX/project_static/
+                mUrl = settings.MEDIA_URL         # Typically /media/
+                mRoot = settings.MEDIA_ROOT       # Typically /home/userX/project_static/media/
+
+                if uri.startswith(mUrl):
+                        path = os.path.join(mRoot, uri.replace(mUrl, ""))
+                elif uri.startswith(sUrl):
+                        path = os.path.join(sRoot, uri.replace(sUrl, ""))
+                else:
+                        return uri
+
+        # make sure that file exists
+        if not os.path.isfile(path):
+                raise Exception(
+                        'media URI must start with %s or %s' % (sUrl, mUrl)
+                )
+        return path
+
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class RisksViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Risks.objects.all()
+    serializer_class = RisksSerializer
+    permission_classes = [permissions.IsAuthenticated]

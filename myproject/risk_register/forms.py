@@ -6,6 +6,9 @@ from django.forms.widgets import NumberInput
 
 #create an Add Risks form
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class AddRisksForm(ModelForm):
     class Meta:
         model = Risks
@@ -17,7 +20,7 @@ class AddRisksForm(ModelForm):
             'risk_owner':'',
             'risk_assignee':'',
             'risk_status':'',
-            'risk_due_date':'',
+            'risk_due_date':'Choose a Risk due date',
         }
         IMPACT_CHOICES = [
             ('resources','Resources'),
@@ -34,7 +37,7 @@ class AddRisksForm(ModelForm):
             'risk_owner':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Owner'}),
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),
             'risk_status':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Status'}),
-            
+            'risk_due_date': (DateInput),
         }
         choices =forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
-        risk_due = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M']),
+        
