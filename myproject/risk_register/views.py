@@ -32,6 +32,21 @@ def risk_register(request):
     }
     return HttpResponse(template.render(context, request))
 
+def dashboard(request):
+    items_list = Risks.objects.all()
+    labels = []
+    data = []
+
+    impact = Risks.objects.order_by('-risk_impact')[:5]
+
+    template = loader.get_template('dashboard.html')
+    context = {
+        'items_list': items_list,
+        'impact': impact,
+    }
+    return HttpResponse(template.render(context, request))
+
+
 def risk_gallery(request):
     items_list = Risks.objects.all()
     template = loader.get_template('risk_gallery.html')

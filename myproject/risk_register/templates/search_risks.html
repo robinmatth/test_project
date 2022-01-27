@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
+
 
 <body>
-
+{% block content %}
 <div class="container-fluid">
 {% if searched %}
   <h2>You searched for <strong>{{ searched }}</strong></h2>
@@ -43,11 +43,10 @@
   {% endfor %}
   </tbody>
       </table>
- </div> {% else %}
+  {% else %}
   <h1>You really should check out our search bar!</h1>
 {% endif %}
-
-  </body>
+{% endblock content %}
+  </div></body>
 </html>
 
-{% endblock content %}

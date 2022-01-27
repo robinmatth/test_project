@@ -29,6 +29,7 @@ urlpatterns = [
     path('risk_gallery/', views.risk_gallery, name="risk_gallery"),
     path('risk_temp/', views.risk_temp, name="risk_temp"),
     path('add_risks/', views.add_risks, name="add_risks"),
+    path('dashboard/', views.dashboard, name="dashboard"),
     path('search_risks/', views.search_risks, name="search_risks"),
     path('risk_register/<int:id>/', views.risk_details, name="risk_details"),
     path('delete_risk/<int:id>/', views.delete_risk, name="delete_risk"),

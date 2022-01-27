@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<body>
 
+<body>
+{% block content %}
   <!--Adding a button URL planned for testing export to csv-->
   
   <br>
@@ -39,10 +39,9 @@
   <input type="submit" value="Add Risk" class="btn btn-secondary">
 
   </form>
+</div>
 {% endif %}
-</div>
-</div>
-  </div>
+{% endblock content %}
+
 </body>
 </html>
-{% endblock content %}
