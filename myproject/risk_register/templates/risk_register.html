@@ -1,60 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
+
 
 <body>
+{% block content %}
 
-<!--Adding a button URL planned for testing export to csv-->
+                <!-- Page content-->
+                <div class="container-fluid">
+                  <h1 class="mt-4">Risk Register</h1>
+                  <a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
+                  <a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a><br>
+                  <br>
+                  <div class="table-responsive table-hover table-bordered ">
+                  <table class="table table-striped">
+                      <thead class="bg-info text-white text-nowrap">
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Risk Description</th>
+                          <th scope="col ">Risk Impact</th>
+                          <th scope="col">Risk Mitigation</th>
+                          <th scope="col">Risk Owner</th>
+                          <th scope="col">Risk Assignee</th>
+                          <th scope="col">Risk Due Date</th>
+                          <th scope="col">Risk Status</th>
+                          <th scope="col">Delete</th>
+                          <th scope="col">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <tr>  
+                          {% for items in items_list.all %}  
+                          <th scope="row ">{{ items.id }}</th>
+                          <td>{{ items.risk_description }}</td>
+                          <td>{{ items.risk_impact }}</td>
+                          <td>{{ items.risk_mitigation }}</td>
+                          <td class="text-nowrap">{{ items.risk_owner }}</td>
+                          <td>{{ items.risk_assignee }}</td>
+                          <td>{{ items.risk_due_date }}</td>
+                          <td>{{ items.risk_status }}</td>
+                          <td class="text-center">
+                            <a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato;"><i class="fa fa-minus-circle"></i></a>
+                          </span></td>
+                          <td class="text-center"><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                          </tr>
+                  
+                        {% endfor %} 
+                      </tbody>
+                    </table>
+              </div>
+          </div>
+      </div>
+      <!-- Bootstrap core JS-->
 
-<br>
-
-
-<div class="container-fluid">
-<br>
-<br>
-
-</div><a href="{% url 'export-csv' %}" class="btn btn-secondary">Export-CSV</a>
-<a href="{% url 'export_pdf' %}" class="btn btn-secondary">Export-PDF</a><br>
-<br>
-<div class="table-responsive table-hover table-bordered ">
-<table class="table table-striped">
-    <thead class="bg-info text-white text-nowrap">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Risk Description</th>
-        <th scope="col ">Risk Impact</th>
-        <th scope="col">Risk Mitigation</th>
-        <th scope="col">Risk Owner</th>
-        <th scope="col">Risk Assignee</th>
-        <th scope="col">Risk Due Date</th>
-        <th scope="col">Risk Status</th>
-        <th scope="col">Delete</th>
-        <th scope="col">Update</th>
-      </tr>
-    </thead>
-    <tbody>
-       <tr>  
-        {% for items in items_list.all %}  
-        <th scope="row ">{{ items.id }}</th>
-        <td>{{ items.risk_description }}</td>
-        <td>{{ items.risk_impact }}</td>
-        <td>{{ items.risk_mitigation }}</td>
-        <td class="text-nowrap">{{ items.risk_owner }}</td>
-        <td>{{ items.risk_assignee }}</td>
-        <td>{{ items.risk_due_date }}</td>
-        <td>{{ items.risk_status }}</td>
-        <td class="text-center">
-          <a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato;"><i class="fa fa-minus-circle"></i></a>
-        </span></td>
-        <td class="text-center"><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-        </tr>
-
-      {% endfor %} 
-    </tbody>
-  </table>
-</div>
+{% endblock content %}
 
   </body>
 </html>
 
-{% endblock content %}

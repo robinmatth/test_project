@@ -21,11 +21,13 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'risks', views.RisksViewSet)
-
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
     path('', views.index, name="index"),
     path('risk_register/', views.risk_register, name="risk_register"),
     path('risk_gallery/', views.risk_gallery, name="risk_gallery"),
+    path('risk_temp/', views.risk_temp, name="risk_temp"),
     path('add_risks/', views.add_risks, name="add_risks"),
     path('search_risks/', views.search_risks, name="search_risks"),
     path('risk_register/<int:id>/', views.risk_details, name="risk_details"),
@@ -37,4 +39,4 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

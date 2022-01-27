@@ -63,6 +63,13 @@ def risk_details(request,id):
     }
     return render (request,"risk_details.html",context)
 
+def risk_temp(request):
+    items_list = Risks.objects.all()
+    context = {
+    'items_list': items_list
+    }
+    return render (request,"risk_temp.html",context)
+
 def add_risks(request):
     submitted = False
     if request.method == "POST":
