@@ -1,4 +1,6 @@
+from audioop import avg
 from dataclasses import field
+from importlib import resources
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,HttpResponseRedirect
 import django_tables2 as tables
@@ -18,7 +20,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from risk_register.serializers import UserSerializer, GroupSerializer, RisksSerializer
-
+from django.db.models import Count
+from django.db.models import Avg
 
 def index(request):
     # return response
@@ -31,6 +34,28 @@ def risk_register(request):
         'items_list': items_list,
     }
     return HttpResponse(template.render(context, request))
+
+def dashboard(request):
+    labels = []
+    data = []
+
+    queryset = Risks.objects.order_by('-risk_impact')[:10]
+    count = Risks.objects.count()
+
+    cost_count = Risks.objects.filter(risk_impact='cost').count()
+    schedule_count = Risks.objects.filter(risk_impact='schedule').count()   
+    for item in queryset:
+        labels.append(item.risk_impact)
+        data.append(item.id)
+
+    return render(request, 'dashboard.html', {
+        'labels': labels,
+        'data': data,
+        'count': count,
+        'cost_count': cost_count,
+        'schedule_count': schedule_count,
+    })
+
 
 def risk_gallery(request):
     items_list = Risks.objects.all()
@@ -62,6 +87,13 @@ def risk_details(request,id):
         'items_list': items_list
     }
     return render (request,"risk_details.html",context)
+
+def risk_temp(request):
+    items_list = Risks.objects.all()
+    context = {
+    'items_list': items_list
+    }
+    return render (request,"risk_temp.html",context)
 
 def add_risks(request):
     submitted = False

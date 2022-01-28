@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<body>
+{% block content %}
+<!--  Chart Canvas-->
+<div class="container-fluid">
+  <h6>Total Risk Count </h6><div class="row">
+      <div class="col-md-4 py-2">
+          <div class="card">
+                         <div class="card-body text-center">
+   <h1> {{ count }}</h1>
+              </div>
+          </div>
+      </div>
+   </div>     
+</div>
+<h4>Cost Count</h4>
+{{ cost_count }}
+<h4>Schedule Count</h4>
+{{ schedule_count }}
+<div class="container-fluid">
+  <h6>Project Risk </h6><div class="row">
+      <div class="col-md-4 py-2">
+          <div class="card">
+  
+              <div class="card-body">
+                <canvas id="myChart"></canvas>    
+              </div>
+          </div>
+      </div>
+   </div>     
+</div>
+
+</div>
+<!-- Create Chart-->
+<script>
+
+  var config = {
+    type: 'bar',
+    data: {
+      datasets: [{
+        data: {{ data|safe }},
+        backgroundColor: 'blue',
+        label: 'Risks',
+      }],
+      labels: {{ labels|safe }}
+    },
+    options: {
+      responsive: true
+    }
+  };
+
+  window.onload = function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    window.myPie = new Chart(ctx, config);
+  };
+
+</script>
+                
+</div>
+<!-- {% for items in items_list.all %}  
+<th scope="row ">{{ items.id }}</th>
+<td>{{ items.risk_description }}</td>
+<td>{{ items.risk_impact }}</td>
+<td>{{ items.risk_mitigation }}</td>
+<td class="text-nowrap">{{ items.risk_owner }}</td>
+<td>{{ items.risk_assignee }}</td>
+<td>{{ items.risk_due_date }}</td>
+<td>{{ items.risk_status }}</td>
+
+{% endfor %}  -->
+
+      <!-- Bootstrap core JS-->
+
+{% endblock content %}
+
+  </body>
+</html>
+
