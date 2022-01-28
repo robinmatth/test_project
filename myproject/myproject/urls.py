@@ -43,9 +43,10 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('risk_temp/', views.risk_temp, name="risk_temp"),
-    
+    # Authentication Paths and User Profile
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name="register"),  
+    path('profile/', user_views.profilepage, name="profile"), 
     path('login/', authentication_views.LoginView.as_view(template_name='users/login.html'), name="login"),
     path('logout/', authentication_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"), 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
