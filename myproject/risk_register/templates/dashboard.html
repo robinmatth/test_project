@@ -5,7 +5,21 @@
 <body>
 {% block content %}
 <!--  Chart Canvas-->
-
+<div class="container-fluid">
+  <h6>Total Risk Count </h6><div class="row">
+      <div class="col-md-4 py-2">
+          <div class="card">
+                         <div class="card-body text-center">
+   <h1> {{ count }}</h1>
+              </div>
+          </div>
+      </div>
+   </div>     
+</div>
+<h4>Cost Count</h4>
+{{ cost_count }}
+<h4>Schedule Count</h4>
+{{ schedule_count }}
 <div class="container-fluid">
   <h6>Project Risk </h6><div class="row">
       <div class="col-md-4 py-2">
@@ -19,54 +33,30 @@
    </div>     
 </div>
 
- 
-  
 </div>
 <!-- Create Chart-->
 <script>
-  const labels = [
-    'Impact 1',
-    'Impact 2',
-    'Impact 3',
-    'Impact 4',
-    'Impact 5',
-    'Impact 6',
-  ];
 
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Project Risks by Impact',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
-    }]
+  var config = {
+    type: 'bar',
+    data: {
+      datasets: [{
+        data: {{ data|safe }},
+        backgroundColor: 'blue',
+        label: 'Risks',
+      }],
+      labels: {{ labels|safe }}
+    },
+    options: {
+      responsive: true
+    }
   };
 
-  const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    plugins: {
-      title: {
-        display: true,
-        text: 'Risks by Category'
-      }
-    },
-    scales: {
-      y: {
-        stacked: true
-      }
-    }
-  },
-};
-</script>
-<!-- Render Chart-->
-<script>
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+  window.onload = function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    window.myPie = new Chart(ctx, config);
+  };
+
 </script>
                 
 </div>
