@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<h1>Login </h1>
 <br>
 <div class="container-fluid">
 <form method="POST">
 {% csrf_token %}
 {{ form }}
-<button type="submit">Sign Up</button>
+<button type="submit">Login</button>
 </form>
 </div>
 {% endblock content %}

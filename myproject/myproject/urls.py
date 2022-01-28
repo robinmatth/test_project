@@ -24,6 +24,8 @@ router.register(r'risks', views.RisksViewSet)
 from django.conf.urls.static import static
 from django.conf import settings
 from users import views as user_views
+from django.contrib.auth import views as authentication_views
+
 
 
 urlpatterns = [
@@ -41,6 +43,9 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('risk_temp/', views.risk_temp, name="risk_temp"),
+    
     path('admin/', admin.site.urls),
-    path('register/', user_views.register, name="register"),    
+    path('register/', user_views.register, name="register"),  
+    path('login/', authentication_views.LoginView.as_view(template_name='users/login.html'), name="login"),
+    path('logout/', authentication_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"), 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
