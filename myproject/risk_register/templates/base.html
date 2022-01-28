@@ -22,14 +22,12 @@
 
   {% block sidebar %}{% include 'partials/sidebar.html' %}{% endblock sidebar %} 
   <body>  
-    
-  {% block content %}
-
-  
 
 
+    {% include 'partials/messages.html' %}
+    {% block content %}
     {% endblock %}
-  
+
 
   <!-- JS, Popper.js, and jQuery Bootstrap Bundle -->
       <!-- Optional JavaScript; choose one of the two! -->
