@@ -23,11 +23,14 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'risks', views.RisksViewSet)
 from django.conf.urls.static import static
 from django.conf import settings
+from users import views as user_views
+
+
 urlpatterns = [
     path('', views.index, name="index"),
     path('risk_register/', views.risk_register, name="risk_register"),
     path('risk_gallery/', views.risk_gallery, name="risk_gallery"),
-    path('risk_temp/', views.risk_temp, name="risk_temp"),
+
     path('add_risks/', views.add_risks, name="add_risks"),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('search_risks/', views.search_risks, name="search_risks"),
@@ -37,7 +40,7 @@ urlpatterns = [
     path('export_pdf', views.export_pdf, name='export_pdf'),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    path('risk_temp/', views.risk_temp, name="risk_temp"),
     path('admin/', admin.site.urls),
-    
+    path('register/', user_views.register, name="register"),    
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
