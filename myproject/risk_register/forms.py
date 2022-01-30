@@ -3,6 +3,8 @@ from django import forms
 from django.forms import ModelForm
 from .models import Risks
 from django.forms.widgets import NumberInput
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 #create an Add Risks form
 
@@ -37,7 +39,10 @@ class AddRisksForm(ModelForm):
             'risk_owner':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Owner'}),
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),
             'risk_status':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Status'}),
-            'risk_due_date': (DateInput),
+            # 'risk_due_date': (DateInput),
+            'risk_due_date': DateInput(),
         }
         choices =forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
-        
+
+
+

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_tables2",
     'rest_framework',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [

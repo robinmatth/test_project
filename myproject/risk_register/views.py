@@ -89,12 +89,12 @@ def risk_details(request,id):
     }
     return render (request,"risk_details.html",context)
 
-def risk_temp(request):
-    items_list = Risks.objects.all()
-    context = {
-    'items_list': items_list
-    }
-    return render (request,"risk_temp.html",context)
+# def risk_temp(request):
+#     items_list = Risks.objects.all()
+#     context = {
+#     'items_list': items_list
+#     }
+#     return render (request,"risk_temp.html",context)
 
 def add_risks(request):
     submitted = False
@@ -111,7 +111,20 @@ def add_risks(request):
             
     return render(request,'add_risks.html', {'form': form, 'submited': submitted})
 
-#Creating an export to PDF option (uses ReportLab library)
+def risk_temp(request):
+    submitted = False
+    if request.method == "POST":
+       form = AddRisksForm(request.POST)
+       if form.is_valid():
+           form.save()
+           messages.success(request,f'You have added a risk to the Register!')
+           return HttpResponseRedirect('/risk_temp?submitted=True')
+    else:
+        form = AddRisksForm
+        if 'submitted' in request.GET:
+            submitted = True
+            
+    return render(request,'risk_temp.html', {'form': form, 'submited': submitted})
 
 def export_pdf(request):
     items_list = Risks.objects.all()
@@ -175,7 +188,6 @@ def link_callback(uri, rel):
                         'media URI must start with %s or %s' % (sUrl, mUrl)
                 )
         return path
-
 
 
 class UserViewSet(viewsets.ModelViewSet):
