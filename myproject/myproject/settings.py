@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_tables2",
     'rest_framework',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +161,7 @@ MESSAGE_TAGS = {
 
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = '/login'
+MEDIA_ROOT = os.path.join(BASE_DIR,'pictures')
+MEDIA_URL ='/pictures/'
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'bootstrap4', 'bootstrap5')
+CRISPY_TEMPLATE_PACK = "bootstrap4"

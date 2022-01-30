@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
+
 <h1>Login </h1>
 <br>
 <div class="container-fluid">
-<form method="POST">
+<form method="POST" class="bootstrap4">
 {% csrf_token %}
-{{ form }}
-<button type="submit">Login</button>
+{{ form|crispy }}
+<br>
+<input type="submit" value="Login" class="btn btn-secondary">
 </form>
 </div>
 {% endblock content %}

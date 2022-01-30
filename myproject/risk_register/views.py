@@ -69,6 +69,7 @@ def risk_gallery(request):
 def delete_risk(request, id):
     items_list = Risks.objects.get(pk=id)
     items_list.delete()
+    messages.success(request,f'You have deleted item # {id} from the Risk Register')
     return redirect('risk_register')
 
 def search_risks(request):
@@ -101,7 +102,7 @@ def add_risks(request):
        form = AddRisksForm(request.POST)
        if form.is_valid():
            form.save()
-           messages.success(request, ('You have succesfully added a risk to the register!'))
+           messages.success(request,f'You have added a risk to the Register!')
            return HttpResponseRedirect('/add_risks?submitted=True')
     else:
         form = AddRisksForm
