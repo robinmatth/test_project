@@ -112,6 +112,12 @@ def add_risks(request):
 def update_risks(request, id):
     risks = Risks.objects.get(id=id)
     form = UpdateRisksForm(instance=risks)
+    if request.method == "POST":
+       form = AddRisksForm(request.POST, instance=risks)
+       if form.is_valid():
+           form.save()
+           return HttpResponseRedirect('/risk_register')
+           messages.success(request,f'You have updated the Risk in the Register!')
     context = {'form': form}
             
     return render(request,'update_risks.html', context)
