@@ -76,6 +76,9 @@
   }
 }
 
+.navbar-default {
+  background: #17252A;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -4030,6 +4033,7 @@ textarea.form-control-lg {
   justify-content: space-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  background-color: #17252A;
   
 }
 .navbar > .container,
@@ -7844,7 +7848,12 @@ textarea.form-control-lg {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
+.bg-matt {
+  --bs-bg-opacity: 1;
+  background-color: #17252A !important;
 
+
+}
 .bg-body {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;

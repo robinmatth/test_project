@@ -13,12 +13,14 @@
             <div class="card h-100 bg-light">       
                 <div class="card-content text-left">
                   <div class="card-header text-white" style="background-color: #2B7A78;">
-                    <h5 class="card-title">Project Risk {{ items.id }}</h5>            
+                    <h5 class="card-title"><i class="fa fa-asterisk"></i> Project Risk {{ items.id }}</h5>            
                     </div>
                     <div class="card-body bg-light">
                       <p class="card-text text-left "><strong>Description:</strong> {{ items.risk_description }}</p>
                     <p class="card-text text-left"><strong>Mitigation:</strong> {{ items.risk_mitigation }}</p>
                     <p class="card-text text-left"><strong>Due Date:</strong>  {{ items.risk_due_date }}</p>
+                    <div style="display: flex; justify-content: flex-end"><a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato; text-align: right;"><i class="fa fa-trash"></i></a>
+                    </span></div>
                     </div>
                 </div><!-- card content -->
             </div><!-- card -->

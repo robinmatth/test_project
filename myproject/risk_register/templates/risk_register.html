@@ -17,6 +17,7 @@
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Risk Description</th>
+                          <th scope="col">Project Description</th>
                           <th scope="col ">Risk Impact</th>
                           <th scope="col">Risk Mitigation</th>
                           <th scope="col">Risk Owner</th>
@@ -32,6 +33,9 @@
                           {% for items in items_list.all %}  
                           <th scope="row ">{{ items.id }}</th>
                           <td>{{ items.risk_description }}</td>
+                          
+                          <td></td>
+                           
                           <td>{{ items.risk_impact }}</td>
                           <td>{{ items.risk_mitigation }}</td>
                           <td class="text-nowrap">{{ items.risk_owner }}</td>
@@ -41,7 +45,7 @@
                           <td class="text-center">
                             <a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato;"><i class="fa fa-minus-circle"></i></a>
                           </span></td>
-                          <td class="text-center"><a href="{% url 'risk_details' items.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                          <td class="text-center"><a href="{% url 'update_risks' items.pk %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                           </tr>
                   
                         {% endfor %} 

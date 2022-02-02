@@ -4,9 +4,9 @@ from importlib import resources
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,HttpResponseRedirect
 import django_tables2 as tables
-from .models import Risks
+from .models import Projects, Risks
 from django.template import loader
-from .forms import AddRisksForm
+from .forms import AddRisksForm, UpdateRisksForm
 import csv, io, datetime,http,os
 from django.http import FileResponse
 from django.views.generic import View
@@ -22,6 +22,9 @@ from rest_framework import permissions
 from risk_register.serializers import UserSerializer, GroupSerializer, RisksSerializer
 from django.db.models import Count
 from django.db.models import Avg
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 
 def index(request):
     # return response
@@ -29,9 +32,11 @@ def index(request):
 
 def risk_register(request):
     items_list = Risks.objects.all()
+    project_list = Projects.objects.all()
     template = loader.get_template('risk_register.html')
     context = {
         'items_list': items_list,
+        'project_list': project_list,
     }
     return HttpResponse(template.render(context, request))
 
@@ -89,13 +94,6 @@ def risk_details(request,id):
     }
     return render (request,"risk_details.html",context)
 
-# def risk_temp(request):
-#     items_list = Risks.objects.all()
-#     context = {
-#     'items_list': items_list
-#     }
-#     return render (request,"risk_temp.html",context)
-
 def add_risks(request):
     submitted = False
     if request.method == "POST":
@@ -111,6 +109,15 @@ def add_risks(request):
             
     return render(request,'add_risks.html', {'form': form, 'submited': submitted})
 
+def update_risks(request, id):
+    risks = Risks.objects.get(id=id)
+    form = UpdateRisksForm(instance=risks)
+    context = {'form': form}
+            
+    return render(request,'update_risks.html', context)
+
+
+
 def risk_temp(request):
     submitted = False
     if request.method == "POST":
@@ -125,6 +132,15 @@ def risk_temp(request):
             submitted = True
             
     return render(request,'risk_temp.html', {'form': form, 'submited': submitted})
+
+
+
+
+
+
+
+
+
 
 def export_pdf(request):
     items_list = Risks.objects.all()
@@ -214,3 +230,8 @@ class RisksViewSet(viewsets.ModelViewSet):
     queryset = Risks.objects.all()
     serializer_class = RisksSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+
+
+ 

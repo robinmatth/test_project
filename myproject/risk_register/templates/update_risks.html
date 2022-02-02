@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<body>
+{% block content %}
+  <!--Adding a button URL planned for testing export to csv-->
+  
+  <br>
+  
+  
+  <div class="container-fluid">
+  <br>
+  <br>
+
+  
+</div>
+{% if submitted %}
+Your risk was added succesfully!
+
+{% else %}
+   
+  <div class="container-fluid">
+    <h2>Update Risks</h2>
+    {% for field in form %}
+<div class="form-group">
+<form action="" method=POST>
+  <label class="col-sm-6 control-label" for="{{ field.name }}">{{ field.label }}</label>
+<div class="col-sm-12">
+          {{ field }}
+      
+  </div>
+  {% endfor %}
+  {% csrf_token %}
+
+<br>
+<input type="submit" value="Add Risk" class="btn btn-secondary">
+<br>
+</div></div>
+</div>
+<div class="modal-footer"> </form>
+
+{% endif %}
+
+    
+
+
+
+{% endblock content %}
+
+</body>
+</html>
