@@ -8,18 +8,24 @@
 <!--Adding a button URL planned for testing export to csv-->
 <div class="container ">
   {%  for items in items_list.all  %}
-      {% if forloop.counter0|divisibleby:3 %} <div class="row text-center "> {%  endif %}
+      {% if forloop.counter0|divisibleby:3 %} <div class="row text-left"> {%  endif %}
         <div class="col-sm-4 py-2 " onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
             <div class="card h-100 bg-light">       
-                <div class="card-content text-left">
-                  <div class="card-header text-white" style="background-color: #2B7A78;">
-                    <h5 class="card-title"><i class="fa fa-asterisk"></i> Project Risk {{ items.id }}</h5>            
+                <div class="card-content text-center">
+                  <div class="card-header text-white" style="background-color: #165250; height: 4rem;">
+                    <h5 class="card-title"><i class="fa fa-asterisk"></i> Project Risk {{ items.id }}   <a href ="{% url 'delete_risk' items.id %}"><div style="float:right;"><i class="fa fa-trash text-white" "></a></a></div></i>
+                      <div class="text-align: center"><div></h5>            
                     </div>
                     <div class="card-body bg-light">
-                      <p class="card-text text-left "><strong>Description:</strong> {{ items.risk_description }}</p>
-                    <p class="card-text text-left"><strong>Mitigation:</strong> {{ items.risk_mitigation }}</p>
+                      <h5> {{ items.risk_description }}</h5>
+                      
+                      <blockquote class="blockquote">
+                        <p class="lead">
+                          </p><small><em>{{ items.risk_mitigation }}</em></small></p>
+                      </blockquote>
+                    <p><br></p>
                     <p class="card-text text-left"><strong>Due Date:</strong>  {{ items.risk_due_date }}</p>
-                    <div style="display: flex; justify-content: right"><a href ="{% url 'delete_risk' items.id %}"><span style="font-size: 1em; color: Tomato; text-align: right;"><i class="fa fa-trash"><br></i></a>
+                    <div style="display: flex; justify-content: right"></a>
                     </span><br>
                     <div style="display: flex; justify-content: right "><a href ="{% url 'update_risks' items.pk %}"><span style="font-size: 1em; color: rgb(141, 71, 255); text-align: right; margin-left: 10px"><i class="fa fa-edit"></i></a>
                     </span><br></div><br></div>
