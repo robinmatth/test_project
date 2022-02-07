@@ -63,10 +63,24 @@ def dashboard(request):
 
 
 def risk_gallery(request):
+    submitted = False
+    if request.method == "POST":
+       form = AddRisksForm(request.POST)
+       if form.is_valid():
+           form.save()
+           messages.success(request,f'You have added a risk to the Register!')
+           return HttpResponseRedirect('/risk_gallery')
+    else:
+        form = AddRisksForm
+        if 'submitted' in request.GET:
+            submitted = True
+
     items_list = Risks.objects.all()
     template = loader.get_template('risk_gallery.html')
     context = {
         'items_list': items_list,
+        'form': form,
+        'submitted': submitted,
     }
     return HttpResponse(template.render(context, request))
 
@@ -75,7 +89,7 @@ def delete_risk(request, id):
     items_list = Risks.objects.get(pk=id)
     items_list.delete()
     messages.success(request,f'You have deleted item # {id} from the Risk Register')
-    return redirect('risk_register')
+    return redirect('risk_gallery')
 
 def search_risks(request):
     if request.method == "POST":

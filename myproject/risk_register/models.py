@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 IMPACT_CHOICES = (
-    ('please select','Please select'),
+    ('choose a category','Choose a category'),
     ('resources','Resources'),
     ('cost', 'Cost'),
     ('schedule','Schedule'),
@@ -20,10 +20,10 @@ class Risks(models.Model):
     
     risk_description = models.CharField(max_length=200)
     risk_owner = models.CharField(max_length=100)
-    risk_impact = models.CharField(max_length=15, choices=IMPACT_CHOICES, default='please select')
+    risk_impact = models.CharField(max_length=30, choices=IMPACT_CHOICES, default='choose a category')
     risk_date = models.DateField(blank=True, null=True)
     risk_mitigation = models.CharField(max_length=500)
-    risk_due_date = models.DateField(blank=True, null=True)
+    risk_due_date = models.DateField(blank=True, null=True, default='Pick a due date')
     risk_status = models.CharField(max_length=200)
     risk_assignee = models.CharField(max_length=200)
     

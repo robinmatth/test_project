@@ -12,9 +12,6 @@
   <br>
   <br>
 
-  <h2>Add Risks</h2>
-
-    
 <!-- {% if messages %}
 {% for message in messages %}
 <div class="container-fluid p-0">
@@ -32,16 +29,24 @@
   Your risk was added succesfully!
 
 {% else %}
+           
 <div class="container-fluid">
+  <H1>Add Risks</H1>
+  {% for field in form %}
 <div class="form-group">
-  <form action="" method=POST>
-  {% csrf_token %}
+<form action="" method=POST>
+<label class="col-sm-6 control-label" for="{{ field.name }}">{{ field.label }}</label>
+<div class="col-sm-12">
+  
+        {{ field }}
+    
+</div>
+{% endfor %}
+{% csrf_token %}
 
-  {{ form|crispy }}
-  <br>
-  <input type="submit" value="Add Risk" class="btn btn-secondary">
-
-  </form>
+<br>
+<input type="submit" value="Add Risk" class="btn btn-secondary">
+<br>
 </div></div>
 {% endif %}
 {% endblock content %}

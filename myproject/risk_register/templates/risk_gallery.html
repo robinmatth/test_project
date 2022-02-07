@@ -6,23 +6,29 @@
 <br>
 <br>
 <!--Adding a button URL planned for testing export to csv-->
-<div class="container ">
+<div class="container "><button type="button" class="btn btn-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Risk
+</button>
   {%  for items in items_list.all  %}
       {% if forloop.counter0|divisibleby:3 %} <div class="row text-left"> {%  endif %}
         <div class="col-sm-4 py-2 " onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
-            <div class="card h-100 bg-light">       
+            <div class="card h-100 bg-light shadow-lg bg-white rounded">
+              <!-- <img class="card-img-top" src="{% static 'images\sky.jpg' %}" alt="Card image cap"> -->
+                 
                 <div class="card-content text-center">
-                  <div class="card-header text-white" style="background-color: #165250; height: 4rem;">
-                    <h5 class="card-title"><i class="fa fa-asterisk"></i> Project Risk {{ items.id }}   <a href ="{% url 'delete_risk' items.id %}"><div style="float:right;"><i class="fa fa-trash text-white" "></a></a></div></i>
-                      <div class="text-align: center"><div></h5>            
+                  <div class="card-header text-white rounded-10 bg-gradient" style="background-color: #165250; height: 3rem;">
+                    <h4 class="card-title"><i class="fa fa-bullseye"></i> Project risk {{ items.id }}   <a href ="{% url 'delete_risk' items.id %}"><div style="float:right;"><i class="fa fa-trash text-white animated-hover" "></a></a></div></i>
+                      <div class="text-align: center"><div></h4>            
                     </div>
-                    <div class="card-body bg-light">
+                    <div class="card-body bg-white">
+                      
                       <h5> {{ items.risk_description }}</h5>
                       
                       <blockquote class="blockquote">
                         <p class="lead">
                           </p><small><em>{{ items.risk_mitigation }}</em></small></p>
                       </blockquote>
+                      <h4 class="card-text text-left text-muted"><strong>Owner: </strong>  {{ items.risk_owner }}</h4>
                     <p><br></p>
                     <p class="card-text text-left"><strong>Due Date:</strong>  {{ items.risk_due_date }}</p>
                     <div style="display: flex; justify-content: right"></a>
@@ -36,7 +42,57 @@
   {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing --><br>{%  endif %}
   {%  endfor %}
 </div><!-- container -->
+<!-- Button trigger modal -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ user }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+
+          
+      </div>
+        {% if submitted %}
+        Your risk was added succesfully!
+      
+        {% else %}
+           
+          <div class="container-fluid">
+            <H1>Add Risks</H1>
+            {% for field in form %}
+      <div class="form-group">
+        <form action="" method=POST>
+          <label class="col-sm-6 control-label" for="{{ field.name }}">{{ field.label }}</label>
+        <div class="col-sm-12">
+                  {{ field }}
+              
+          </div>
+          {% endfor %}
+          {% csrf_token %}
+
+        <br>
+        <input type="submit" value="Add Risk" class="btn btn-secondary">
+        <br>
+        </div></div>
+     </div>
+      <div class="modal-footer"> </form>
+      
+        {% endif %}
+
+
+      
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div> 
 
 
 

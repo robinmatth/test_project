@@ -17,12 +17,12 @@ class AddRisksForm(ModelForm):
         fields = ('id','risk_description','risk_impact','risk_mitigation','risk_owner','risk_assignee','risk_status','risk_due_date')
         labels = {
             'risk_description':'',
-            'risk_impact':' Select a Risk Category',
+            'risk_impact':'',
             'risk_mitigation':'',
             'risk_owner':'',
             'risk_assignee':'',
             'risk_status':'',
-            'risk_due_date':'Choose a Risk due date',
+            'risk_due_date':'Please choose a due date for the risk: ',
         }
         IMPACT_CHOICES = [
             ('resources','Resources'),
@@ -34,15 +34,15 @@ class AddRisksForm(ModelForm):
         
         widgets = {
             'risk_description':forms.Textarea(attrs={'rows':6,'class': 'form-control', 'placeholder':'Risk Description'}),
-            
+            'risk_impact': forms.Select(attrs={'class':'form-select', 'placeholder':'other','style': 'width:200px'}),
             'risk_mitigation':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Mitigation'}),
             'risk_owner':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Owner'}),
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),
             'risk_status':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Status'}),
-            # 'risk_due_date': (DateInput),
-            'risk_due_date': DateInput(),
+            'risk_due_date': forms.DateInput(attrs={'class': 'form-control','type': 'date','style': 'width:200px'}),
+
         }
-        choices =forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
+
 
 
 class UpdateRisksForm(ModelForm):
@@ -51,12 +51,12 @@ class UpdateRisksForm(ModelForm):
         fields = ('id','risk_description','risk_impact','risk_mitigation','risk_owner','risk_assignee','risk_status','risk_due_date')
         labels = {
             'risk_description':'',
-            'risk_impact':' Select a Risk Category',
+            'risk_impact':'',
             'risk_mitigation':'',
             'risk_owner':'',
             'risk_assignee':'',
             'risk_status':'',
-            'risk_due_date':'Choose a Risk due date',
+            'risk_due_date':'Please choose a due date for the risk: ',
         }
         IMPACT_CHOICES = [
             ('resources','Resources'),
@@ -68,13 +68,13 @@ class UpdateRisksForm(ModelForm):
         
         widgets = {
             'risk_description':forms.Textarea(attrs={'rows':6,'class': 'form-control', 'placeholder':'Risk Description'}),
-            
+            'risk_impact': forms.Select(attrs={'class':'form-select', 'placeholder':'other','style': 'width:200px'}),
             'risk_mitigation':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Mitigation'}),
             'risk_owner':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Owner'}),
             'risk_assignee':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Assignee'}),
             'risk_status':forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Risk Status'}),
-            # 'risk_due_date': (DateInput),
-            'risk_due_date': DateInput(),
+            'risk_due_date': forms.DateInput(attrs={'class': 'form-control','type': 'date','style': 'width:200px'}),
+
         }
-        choices =forms.ChoiceField(label="other", choices=IMPACT_CHOICES, required=True),
+
 

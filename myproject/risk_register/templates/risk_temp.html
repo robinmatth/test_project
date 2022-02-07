@@ -4,8 +4,13 @@
 
 <body>
 {% block content %}
-
-
+<div>
+  <p></p>
+</div>
+<div class="container-fluid">
+  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+</div>
+<br>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -17,11 +22,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ user }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          
 
             
         </div>
@@ -62,6 +66,11 @@
   </div> 
 
 
+
+
+
+
+  
 
 {% endblock content %}
 
