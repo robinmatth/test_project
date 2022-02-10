@@ -3,12 +3,20 @@
 {% block content %}
 
 <body>
+
+{%  for project in project_list.all  %}
+  {{ project.project_description }}
+  {{ risks }}
+  {%  endfor  %}  
 <br>
 <br>
 <!--Adding a button URL planned for testing export to csv-->
-<div class="container "><button type="button" class="btn btn-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<div class="container ">
+  
+  <div class="btn-group"><button type="button" class="btn btn-secondary bg-gradient mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add Risk
-</button>
+</button> <br>
+</div>
   {%  for items in items_list.all  %}
       {% if forloop.counter0|divisibleby:3 %} <div class="row text-left"> {%  endif %}
         <div class="col-sm-4 py-2 " onclick="window.location.href='{% url 'risk_details' items.id %}'" style="cursor: pointer">
@@ -30,7 +38,9 @@
                       </blockquote>
                       <h4 class="card-text text-left text-muted"><strong>Owner: </strong>  {{ items.risk_owner }}</h4>
                     <p><br></p>
+                    <p class="card-text text-left"><strong>Created Date:</strong>  {{ items.created_at }}</p>
                     <p class="card-text text-left"><strong>Due Date:</strong>  {{ items.risk_due_date }}</p>
+                    <p class="card-text text-left"><strong>Due Date:</strong> {{ items.project_description }} </p>
                     <div style="display: flex; justify-content: right"></a>
                     </span><br>
                     <div style="display: flex; justify-content: right "><a href ="{% url 'update_risks' items.pk %}"><span style="font-size: 1em; color: rgb(141, 71, 255); text-align: right; margin-left: 10px"><i class="fa fa-edit"></i></a>
@@ -43,7 +53,6 @@
   {%  endfor %}
 </div><!-- container -->
 <!-- Button trigger modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,28 +71,29 @@
         Your risk was added succesfully!
       
         {% else %}
-           
-          <div class="container-fluid">
-            <H1>Add Risks</H1>
-            {% for field in form %}
-      <div class="form-group">
-        <form action="" method=POST>
-          <label class="col-sm-6 control-label" for="{{ field.name }}">{{ field.label }}</label>
-        <div class="col-sm-12">
-                  {{ field }}
-              
-          </div>
-          {% endfor %}
-          {% csrf_token %}
+          
+  <div class="container-fluid">
+    <h2>Update Risks</h2>
+    {% for field in form %}
+<div class="form-group">
+<form action="" method=POST>
+  <label class="col-sm-6 control-label" for="{{ field.name }}">{{ field.label }}</label>
+<div class="col-sm-12">
+          {{ field }}
+      
+  </div>
+  {% endfor %}
+  {% csrf_token %}
 
-        <br>
-        <input type="submit" value="Add Risk" class="btn btn-secondary">
-        <br>
-        </div></div>
+<br>
+<input type="submit" value="Update Risk" class="btn btn-secondary">
+<br>
+</div></div>
      </div>
       <div class="modal-footer"> </form>
       
         {% endif %}
+
 
 
       

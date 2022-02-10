@@ -32,11 +32,11 @@ def index(request):
 
 def risk_register(request):
     items_list = Risks.objects.all()
-    project_list = Projects.objects.all()
+
     template = loader.get_template('risk_register.html')
     context = {
         'items_list': items_list,
-        'project_list': project_list,
+
     }
     return HttpResponse(template.render(context, request))
 
@@ -76,11 +76,13 @@ def risk_gallery(request):
             submitted = True
 
     items_list = Risks.objects.all()
+    project_list = Projects.objects.all()
     template = loader.get_template('risk_gallery.html')
     context = {
         'items_list': items_list,
         'form': form,
         'submitted': submitted,
+        'project_list': project_list,
     }
     return HttpResponse(template.render(context, request))
 
